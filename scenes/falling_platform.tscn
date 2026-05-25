@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://bf7q2xpyhgvq7"]
+
+[ext_resource type="Script" uid="uid://cuvpt1x2taeso" path="res://scripts/falling_platform.gd" id="1_eyv7q"]
+[ext_resource type="Texture2D" uid="uid://ch1yst868wd1b" path="res://assets/platform/Falling Platforms/On (32x10).png" id="1_l3rcd"]
+[ext_resource type="Texture2D" uid="uid://73h0icdyinjs" path="res://assets/platform/Falling Platforms/Off.png" id="2_rehgp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egpwq"]
+atlas = ExtResource("2_rehgp")
+region = Rect2(0, 0, 32, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyv7q"]
+atlas = ExtResource("1_l3rcd")
+region = Rect2(0, 0, 32, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rehgp"]
+atlas = ExtResource("1_l3rcd")
+region = Rect2(32, 0, 32, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4u4ee"]
+atlas = ExtResource("1_l3rcd")
+region = Rect2(64, 0, 32, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgkqx"]
+atlas = ExtResource("1_l3rcd")
+region = Rect2(96, 0, 32, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_egpwq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_egpwq")
+}],
+"loop": true,
+"name": &"falling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyv7q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rehgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4u4ee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgkqx")
+}],
+"loop": true,
+"name": &"on",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ausku"]
+size = Vector2(33, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rehgp"]
+size = Vector2(33, 7)
+
+[node name="falling_platform" type="StaticBody2D" unique_id=2057487686]
+collision_layer = 2
+script = ExtResource("1_eyv7q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=580073541]
+sprite_frames = SubResource("SpriteFrames_egpwq")
+animation = &"falling"
+autoplay = "on"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1043338723]
+position = Vector2(0.5, -2.5)
+shape = SubResource("RectangleShape2D_ausku")
+one_way_collision = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=641156447]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=427725583]
+position = Vector2(0.5, -3.5)
+shape = SubResource("RectangleShape2D_rehgp")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
