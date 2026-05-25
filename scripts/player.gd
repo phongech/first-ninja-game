@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const test = 2.0
+const test = 3.0
 const SPEED = 150.0
 const JUMP_VELOCITY = -320.0
 const WALL_JUMP_VELOCITY = Vector2(400,-320)
